@@ -1,0 +1,61 @@
+site_name: AutoExportTool_Pro - 3ds Max动画工具文档
+site_url: https://AniYQiu.github.io/autoexporttool-docs
+repo_url: https://github.com/AniYQiu/autoexporttool
+copyright: Copyright &copy; 2025 叶秋丶zZ 
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.top
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: yellow
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  icon:
+    logo: material/export
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - 首页: index.md
+  - 安装指南: installation.md
+  - 核心功能:
+    - 文件管理: features/file_management.md
+    - FBX导出: features/fbx_export.md
+    - BIP动作管理: features/bip_management.md
+    - 一键换皮: features/skin_replacement.md
+  - 高级功能:
+    - 自定义设置: advanced/customization.md
+    - 工具栏集成: advanced/toolbar_integration.md
+    - 脚本扩展: advanced/scripting.md
+  - 常见问题: faq.md
+  - 开发日志: changelog.md
