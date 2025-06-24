@@ -29,7 +29,7 @@ plugins:
   - search
   - minify:
       minify_html: true
-  
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -45,13 +45,11 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 extra:
-  social:
-    - type: og:image
-      link: https://ladyicefox.github.io/autoexporttool-docs/assets/wechat-share.jpg
-    - type: og:title
-      link: AutoExportTool_Pro - 3ds Max动画工具文档
-    - type: og:url
-      link: https://ladyicefox.github.io/autoexporttool-docs
+  social:  
+    - icon: fontawesome/brands/github
+      link: https://github.com/ladyicefox
+    - icon: material/earth
+      link: https://space.bilibili.com/327573825
 nav:
   - 首页: index.md
   - 安装指南: installation.md
