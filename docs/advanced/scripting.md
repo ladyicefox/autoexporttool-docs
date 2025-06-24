@@ -1,7 +1,7 @@
 # 脚本扩展开发
 
 ## API参考
-```mermaid
+
 classDiagram
     class AutoExportTool {
         +refreshFileListView()

@@ -1,4 +1,4 @@
-
+![安装指南插图栏](images/Plugin_Installation.png){ align=top width=1000 }
 ## 系统要求
 
 - Autodesk 3ds Max 2018+

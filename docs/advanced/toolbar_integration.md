@@ -1,6 +1,7 @@
 # 工具栏集成
 
 ## 工具栏布局
+![工具栏界面插图](../images/toolbar_layout_ct01.png){ align=right width=1000 }
 ![工具栏界面](../images/toolbar_layout.png){ align=right width=300 }
 
 AutoExportTool Pro 提供与 3ds Max 原生工具栏的无缝集成，让您快速访问核心功能：
