@@ -46,6 +46,7 @@ extra_css:
   - stylesheets/extra.css
 extra:
   head: |
+    {% include "extra_head.html" %}
     <meta property="og:image" content="https://ladyicefox.github.io/autoexporttool-docs/assets/wechat-share.png">
     <meta property="og:title" content="AutoExportTool_Pro - 3ds Max动画工具文档">
     <meta property="og:url" content="https://ladyicefox.github.io/autoexporttool-docs">
