@@ -1,8 +1,8 @@
 # 文件管理系统
 
 ## 功能概览
-![文件管理界面](../images/file_management.png){: style="display: block; margin: 0 auto; width: 1000px;" }
-![文件管理界面插图](../images/file_management_ct01.png){ : style="display: block; margin: 0 auto; width: 500px;" }
+![文件管理標題插图](../images/file_management_ct01.png){: style="display: block; margin: 0 auto; width: 1000px;" }
+![文件管理插件界面](../images/file_management.png){ : style="display: block; margin: 0 auto; width: 500px;" }
 ```mermaid
 A[文件列表] --> B[导航操作]
 A --> C[文件操作]

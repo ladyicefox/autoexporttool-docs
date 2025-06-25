@@ -1,10 +1,11 @@
 # 工具栏集成
 
 ## 工具栏布局
-![工具栏界面插图](../images/toolbar_layout_ct01.png){ align=right width=1000 }
-![工具栏界面](../images/toolbar_layout.png){ align=right width=300 }
+![工具栏界面插图](../images/toolbar_Installation_ct01.png){: style="display: block; margin: 0 auto; width: 1000px;" }
+![工具栏界面](../images/toolbar_autostart.png){ : style="display: block; margin: 0 auto; width: 500px;" }
 
 AutoExportTool Pro 提供与 3ds Max 原生工具栏的无缝集成，让您快速访问核心功能：
+![ 自启连线图表](../images/toolbar_toolbar_autostart_tb01.png){ align=right width=300 }
 
 ```mermaid
 graph TB

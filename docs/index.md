@@ -1,7 +1,6 @@
 # AutoExportTool_Pro - 专业3ds Max动画工具
 
-![插件界面截图](images/plugin_screenshot.png){ align=top width=1000 }
-
+![插件標題动图](gifs/demo.gif){ width=1000 align=center }
 **AutoExportTool Pro** 是一款面向3ds Max动画师的专业导出/入工具集，搭配文件管理系统实现高效的打开文件+批量导出/导入/查看/编辑、一键换皮、BIP动作管理等核心功能，大幅提升动画制作效率。
 
 ## 主要特性

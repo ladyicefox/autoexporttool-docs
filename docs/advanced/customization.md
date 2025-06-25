@@ -1,5 +1,6 @@
 # 自定义设置指南
-
+![自定义標題插图](../images/customization_ct01.png){: style="display: block; margin: 0 auto; width: 1000px;" }
+![自定义插件界面](../images/customization.png){ : style="display: block; margin: 0 auto; width: 500px;" }
 ## UI个性化
 
 pie

@@ -1,5 +1,6 @@
 # 脚本扩展开发
-
+![脚本扩展界面插图](../images/toolbar_layout_ct01.png){ align=right width=1000 }
+![脚本扩展界面](../images/toolbar_layout.png){ align=right width=300 }
 ## API参考
 
 classDiagram
