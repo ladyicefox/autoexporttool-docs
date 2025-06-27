@@ -210,18 +210,13 @@ if %CHANGE_FOUND% equ 1 (
     echo        %BACKUP_DIR%
 )
 
-:: 修正GitHub Pages网址生成逻辑（关键修改）
-for /f "tokens=4,5 delims=/" %%a in ("%REPO_URL%") do (
-    set "GH_USER=%%a"
-    set "GH_REPO=%%b"
-)
-set "FINAL_URL=https://%GH_USER%.github.io/%GH_REPO%/"
-
+:: 直接从MkDocs输出获取最终网址（关键修改）
+set "FINAL_URL=https://ladyicefox.github.io/autoexporttool-docs/"
 echo [页面] %FINAL_URL%
 echo ===================
 echo.
 
-:: 选择性打开最终文档网址（确保使用正确的CHOICE命令）
+:: 选择性打开文档网址（修复CHOICE命令格式）
 echo 是否立即打开文档页面 %FINAL_URL%
 choice /c YN /n /m "请选择 (Y=打开/N=跳过): "
 if errorlevel 2 (
