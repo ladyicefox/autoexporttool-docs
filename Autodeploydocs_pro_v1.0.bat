@@ -14,8 +14,17 @@
 setlocal enabledelayedexpansion
 chcp 65001 >nul
 title MkDocs智能部署 v1.0
-color 0B
 
+:: 随机选择4种专业配色之一
+set "COLOR_OPTIONS=07 1F 0B 0A"
+set /a RANDOM_INDEX=%random% %% 4
+for /f "tokens=1-4" %%a in ("%COLOR_OPTIONS%") do (
+    if !RANDOM_INDEX! equ 0 set "RANDOM_COLOR=%%a"
+    if !RANDOM_INDEX! equ 1 set "RANDOM_COLOR=%%b"
+    if !RANDOM_INDEX! equ 2 set "RANDOM_COLOR=%%c"
+    if !RANDOM_INDEX! equ 3 set "RANDOM_COLOR=%%d"
+)
+color !RANDOM_COLOR!
 :: 配置区（自动读取或默认）
 if "%~1"=="/config" (
     call :create_config
