@@ -214,9 +214,14 @@ echo [页面] %GH_PAGES%
 echo ===================
 echo.
 
-:: 自动打开GitHub Pages
-echo [操作] 正在打开GitHub Pages...
-start "" "%GH_PAGES%"
+::: 选择性打开最终网址
+choice /c YN /n /m "是否立即打开最终页面 %GH_PAGES% (Y/N)? "
+if errorlevel 2 (
+    echo 已跳过打开页面
+) else (
+    echo [操作] 正在打开最终页面...
+    start "" "%GH_PAGES%"
+)
 
 :: 快捷接口提示
 echo 提示: 使用 /config 参数创建新配置
