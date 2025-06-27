@@ -1,18 +1,19 @@
 @echo off
 :: ==============================================
-:: MkDocs Pro 智能部署工具 v3.3
+:: MkDocs Pro 智能部署工具 v1.0
 :: 核心功能：
 :: 1. 智能差异检测与备份系统
 :: 2. 自适应工程目录处理
 :: 3. 安全同步机制（防止重复拉取）
 :: 4. 工程配置快捷接口
 :: 5. 增强型状态报告
+:: 6. 智能网页预览控制 / 用户自行选择是否打开网页
 :: ==============================================
 
 :: 初始化环境
 setlocal enabledelayedexpansion
 chcp 65001 >nul
-title MkDocs智能部署 v3.3
+title MkDocs智能部署 v1.0
 color 0B
 
 :: 配置区（自动读取或默认）
@@ -136,11 +137,29 @@ for /f "delims=" %%f in ('type changes.tmp ^| findstr /v "\.git\\"') do (
 )
 del changes.tmp >nul
 
-:: 6. 预览服务控制台
-echo [服务] 启动MkDocs预览...
-start "" /b python -m mkdocs serve
-timeout /t 2 >nul
-echo [预览] 访问 http://127.0.0.1:8000
+:: 6. 预览服务控制台（新增智能检测）
+echo [服务] 检测MkDocs服务状态...
+tasklist /fi "imagename eq python.exe" /fo csv 2>nul | findstr /i "mkdocs" >nul
+if %errorlevel% equ 0 (
+    echo [信息] 检测到已有MkDocs服务正在运行
+    choice /c YN /n /m "是否打开本地预览页面(Y/N)? "
+    if errorlevel 2 (
+        echo 已跳过打开预览页面
+    ) else (
+        start "" "http://127.0.0.1:8000"
+    )
+) else (
+    echo [服务] 启动MkDocs预览...
+    start "" /b python -m mkdocs serve
+    timeout /t 2 >nul
+    echo [预览] 访问 http://127.0.0.1:8000
+    choice /c YN /n /m "是否立即打开预览页面(Y/N)? "
+    if errorlevel 2 (
+        echo 已跳过打开预览页面
+    ) else (
+        start "" "http://127.0.0.1:8000"
+    )
+)
 echo.
 
 :: 7. 用户确认流程
@@ -180,7 +199,7 @@ git push origin %BRANCH% >nul && (
     python -m mkdocs gh-deploy --force >nul
 )
 
-:: 10. 完成报告
+:: 10. 完成报告（核心/用户可自行选择是否打开最终网址，选择Y则自动跳转到最终部署完成的站点）
 echo.
 echo ===== 部署报告 =====
 echo [工程] %PROJECT_NAME%
@@ -190,22 +209,33 @@ if %CHANGE_FOUND% equ 1 (
     echo [备份] 共备份 !CHANGE_FOUND! 个文件
     echo        %BACKUP_DIR%
 )
-echo [页面] %REPO_URL:/github.com/=github.io/%/
+
+:: 修正GitHub Pages网址生成逻辑（关键修改）
+for /f "tokens=2 delims=/" %%a in ("%REPO_URL%") do set "GH_ACCOUNT=%%a"
+for /f "tokens=3 delims=/" %%a in ("%REPO_URL%") do set "GH_REPO=%%a"
+set "FINAL_URL=https://%GH_ACCOUNT%.github.io/%GH_REPO%/"
+
+echo [页面] %FINAL_URL%
 echo ===================
 echo.
+
+:: 选择性打开最终文档网址（非GitHub Pages首页）
+choice /c YN /n /m "是否立即打开文档页面 %FINAL_URL% (Y/N)? "
+if errorlevel 2 (
+    echo 已跳过打开页面
+) else (
+    echo [操作] 正在打开文档页面...
+    start "" "%FINAL_URL%"
+)
 
 :: 快捷接口提示
 echo 提示: 使用 /config 参数创建新配置
 echo      例如: %~nx0 /config
 echo.
 
-:: 保持窗口
-timeout /t 5 >nul
-start "" "%REPO_URL:/github.com/=github.io/%/"
-pause
-
 :: 安全退出
 taskkill /f /im "python.exe" >nul 2>&1
+pause
 exit /b
 
 :: ==============================================
