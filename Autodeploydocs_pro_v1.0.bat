@@ -217,8 +217,8 @@ echo ===================
 echo.
 
 :: 选择性打开文档网址（修复CHOICE命令格式）
-echo 是否立即打开文档页面 %FINAL_URL%
-choice /c YN /n /m "请选择 (Y=打开/N=跳过): "
+echo 是否立即打开文档页面 %FINAL_URL% 
+choice /c YN /n /m "是否打开/最终部署完成的站点？-请选择 (Y=打开/N=跳过): "
 if errorlevel 2 (
     echo 已跳过打开页面
 ) else (
