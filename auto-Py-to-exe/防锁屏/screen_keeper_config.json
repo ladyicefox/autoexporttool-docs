@@ -1,0 +1,10 @@
+{
+  "mode": "scheduled",
+  "wake_times": ["09:00", "12:30", "15:00"],
+  "advanced": {
+    "prevention_interval": 30,
+    "mouse_movement": true,
+    "keyboard_shortcut": "Shift"
+  },
+  "last_active": null
+}
