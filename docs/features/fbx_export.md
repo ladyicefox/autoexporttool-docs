@@ -37,7 +37,50 @@ FbxExporterSetParam "BakeResampleAnimation" true
 FbxExporterSetParam "FilterKeyReducer" true
 */
 ```
-
+导出动画详细参数设置 （FX 函数 参考 ）
+-- 强化动画检测-函数
+fn export_mod_fn mod_state = (
+    --
+    case mod_state of (
+        1: ( -- Auto模式（智能判断）
+            FbxExporterSetParam "ResetExport"
+            FbxExporterSetParam "SmoothingGroups" true
+            FbxExporterSetParam "SmoothMeshExport" true
+            
+            FbxExporterSetParam "Cameras" false
+            FbxExporterSetParam "Lights" false
+            FbxExporterSetParam "EmbedTextures" false
+            FbxExporterSetParam "ShowWarnings" false
+        )
+        2: ( -- Skin模型模式
+            FbxExporterSetParam "ResetExport"
+            FbxExporterSetParam "SmoothingGroups" true
+            FbxExporterSetParam "SmoothMeshExport" true
+            FbxExporterSetParam "Animation" false
+            FbxExporterSetParam "EmbedTextures" false
+            FbxExporterSetParam "Cameras" false
+            FbxExporterSetParam "Lights" false
+            FbxExporterSetParam "Skin" true -- 显式启用蒙皮
+            FbxExporterSetParam "ShowWarnings" false
+        )
+        3: ( -- Bake动画模式
+            FbxExporterSetParam "ResetExport"
+            FbxExporterSetParam "SmoothingGroups" false
+            FbxExporterSetParam "SmoothMeshExport" false
+            
+            FbxExporterSetParam "Animation" true
+            FbxExporterSetParam "BakeAnimation" true
+            FbxExporterSetParam "BakeResampleAnimation" true
+            FbxExporterSetParam "FilterKeyReducer" true
+            
+            FbxExporterSetParam "EmbedTextures" false
+            FbxExporterSetParam "Cameras" false
+            FbxExporterSetParam "Lights" false
+            FbxExporterSetParam "ShowWarnings" false
+        )
+    )
+        
+)
 ## 批量导出流程
 ```mermaid
 sequenceDiagram
@@ -68,10 +111,22 @@ if auto_makedir_set.checked do (
 )
 
 -- 挂点归零技术
+目前 的 挂点  默认为 xyz 归零 ，旋转 X : 90 ,Y : 0,Z : 0  (注意！是 view轴 )
 if auto_socket.checked do (
     for obj in selection where classOf obj == Dummy do (
         obj.pos = [0,0,0]
-        obj.rotation = quat 0 0 0 1
+        
+    if chk_rotation.checked do (
+        -- 确保使用Euler XYZ控制器
+                if chk_euler.checked and classOf obj.rotation.controller != Euler_XYZ then (
+                    obj.rotation.controller = Euler_XYZ()
+                )
+                
+                obj.rotation.controller.x_rotation = 90
+                obj.rotation.controller.y_rotation = 0
+                obj.rotation.controller.z_rotation = 0
+            )
+    
     )
 )
 ```
